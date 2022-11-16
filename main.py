@@ -69,3 +69,5 @@ mc = ModelCheckpoint(filepath='bestmodel.h5',
 cb = [es, mc]
 
 his = model.fit_generator(train, steps_per_epoch=16, epochs=50, verbose = 1, callbacks= cb, validation_data=val, validation_steps=16)
+
+
