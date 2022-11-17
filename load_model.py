@@ -28,4 +28,3 @@ def prediction(path):
 path = '/content/PlantVillage/Potato___Early_blight/044c3abc-0bc9-45fb-8fd5-094aeb605f90___RS_Early.B 8044.JPG'
 
 prediction(path)
-train.class_indices

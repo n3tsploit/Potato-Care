@@ -37,3 +37,5 @@ mc = ModelCheckpoint(filepath="best_model.h5", monitor='val_accuracy', min_delta
 cb = [es, mc]
 his = model.fit_generator(train, steps_per_epoch=16, epochs=50, verbose=1, callbacks=cb, validation_data=val,
                           validation_steps=16)
+
+print('Model created....')
