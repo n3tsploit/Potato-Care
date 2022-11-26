@@ -10,12 +10,19 @@ load_dotenv(Path("./telebot/.env"))
 TOKEN = os.getenv('TOKEN')
 
 
-def start_command():
-    print('hello')
+def start_command(update, context):
+    context.bot.sendMessage(text='Bye👋', chat_id=update.effective_chat.id)
 
 
-def messages():
-    print('me')
+def messages(update, context):
+    context.bot.sendMessage(text='Bye👋', chat_id=update.effective_chat.id)
+
+
+def photo_handler(update, context):
+    file = update.message.photo[0].file_id
+    print('downloading')
+    obj = context.bot.get_file(file)
+    obj.download()
 
 
 def main():
@@ -26,6 +33,10 @@ def main():
     disp.add_handler(CommandHandler('start', start_command))
     disp.add_handler(CommandHandler('check', start_command))
 
-    disp.add_handler(MessageHandler(Filters.text, messages))
+    # disp.add_handler(MessageHandler(Filters.text, messages))
+    disp.add_handler(MessageHandler(Filters.photo, photo_handler))
 
     updater.start_polling()
+    print('running')
+    updater.idle()
+
