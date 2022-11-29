@@ -19,11 +19,11 @@ def messages(update, context):
 
 
 def photo_handler(update, context):
-    file = update.message.photo[0].file_id
+    file = update.message.document.file_id
     print('downloading')
     obj = context.bot.get_file(file)
-    obj.download()
-
+    obj.download('a')
+    print('done')
 
 def main():
     updater = Updater(TOKEN, use_context=True)
@@ -33,8 +33,8 @@ def main():
     disp.add_handler(CommandHandler('start', start_command))
     disp.add_handler(CommandHandler('check', start_command))
 
-    # disp.add_handler(MessageHandler(Filters.text, messages))
-    disp.add_handler(MessageHandler(Filters.photo, photo_handler))
+    disp.add_handler(MessageHandler(Filters.text, messages))
+    disp.add_handler(MessageHandler(Filters.document, photo_handler))
 
     updater.start_polling()
     print('running')
