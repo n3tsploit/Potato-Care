@@ -1,7 +1,7 @@
 import telegram
 from telegram.ext import *
 from telegram import *
-from telebot import functions
+from telebot.functions import image_check
 from dotenv import load_dotenv
 from pathlib import Path
 import os
@@ -11,19 +11,23 @@ TOKEN = os.getenv('TOKEN')
 
 
 def start_command(update, context):
-    context.bot.sendMessage(text='Bye👋', chat_id=update.effective_chat.id)
+    context.bot.sendMessage(text='welcome here are the commands\n identify', chat_id=update.effective_chat.id)
 
 
 def messages(update, context):
-    context.bot.sendMessage(text='Bye👋', chat_id=update.effective_chat.id)
+    context.bot.sendMessage(text='Sorry I cannot understand your message. Use \help to get the command',
+                            chat_id=update.effective_chat.id)
 
 
 def photo_handler(update, context):
     file = update.message.document.file_id
     print('downloading')
     obj = context.bot.get_file(file)
-    obj.download('a')
-    print('done')
+    file = obj.download()
+    response = image_check(file)
+    print(file)
+    update.message.reply_text(f'The plant disease is: {response}')
+
 
 def main():
     updater = Updater(TOKEN, use_context=True)
@@ -39,4 +43,3 @@ def main():
     updater.start_polling()
     print('running')
     updater.idle()
-
