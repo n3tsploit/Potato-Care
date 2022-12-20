@@ -73,4 +73,4 @@ history = model.fit(
     epochs=50,
 )
 
-model.save("potatoes.h5")
+model.save("lpotatoes.h5")
