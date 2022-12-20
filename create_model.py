@@ -35,3 +35,40 @@ test_ds = test_ds.cache().shuffle(1000).prefetch(buffer_size=tf.data.AUTOTUNE)
 resize_and_rescale = tf.keras.Sequential([layers.experimental.preprocessing.Resizing(image_size,image_size), layers.experimental.preprocessing.Rescaling(1.0/255)])
 data_augmentation = tf.keras.Sequential([layers.experimental.preprocessing.RandomFlip("horizontal_and_vertical"), layers.experimental.preprocessing.RandomRotation(0.2)])
 
+# building model
+input_shape = (batch_size, image_size, image_size, channels)
+n_classes = 3
+
+model = models.Sequential([
+    resize_and_rescale,
+    layers.Conv2D(32, kernel_size = (3,3), activation='relu', input_shape=input_shape),
+    layers.MaxPooling2D((2, 2)),
+    layers.Conv2D(64,  kernel_size = (3,3), activation='relu'),
+    layers.MaxPooling2D((2, 2)),
+    layers.Conv2D(64,  kernel_size = (3,3), activation='relu'),
+    layers.MaxPooling2D((2, 2)),
+    layers.Conv2D(64, (3, 3), activation='relu'),
+    layers.MaxPooling2D((2, 2)),
+    layers.Conv2D(64, (3, 3), activation='relu'),
+    layers.MaxPooling2D((2, 2)),
+    layers.Conv2D(64, (3, 3), activation='relu'),
+    layers.MaxPooling2D((2, 2)),
+    layers.Flatten(),
+    layers.Dense(64, activation='relu'),
+    layers.Dense(n_classes, activation='softmax'),
+])
+
+model.build(input_shape=input_shape)
+
+model.compile(
+    optimizer='adam',
+    loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=False),
+    metrics=['accuracy']
+)
+history = model.fit(
+    train_ds,
+    batch_size=batch_size,
+    validation_data=val_ds,
+    verbose=1,
+    epochs=50,
+)
