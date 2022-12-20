@@ -72,3 +72,5 @@ history = model.fit(
     verbose=1,
     epochs=50,
 )
+
+model.save("potatoes.h5")
