@@ -7,7 +7,7 @@ def predict(image_name):
 
     model = tf.keras.models.load_model('potatoes.h5')
     # Load the image
-    image = tf.io.read_file('4fbe268d-dabb-4a25-8283-7968fd91fcdb___RS_LB 4819.JPG')
+    image = tf.io.read_file(image_name)
 
     # Decode the image
     image = tf.image.decode_image(image)
