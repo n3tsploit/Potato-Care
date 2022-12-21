@@ -1,14 +1,25 @@
 import tensorflow as tf
-from tensorflow.keras import models, layers
 import numpy as np
 
 class_names = ['Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy']
-def predict(model, img):
-    img_array = tf.keras.preprocessing.image.img_to_array(images[i].numpy())
-    img_array = tf.expand_dims(img_array, 0)
 
-    predictions = model.predict(img_array)
+model = tf.keras.models.load_model('potatoes.h5')
+# Load the image
+image = tf.io.read_file('4fbe268d-dabb-4a25-8283-7968fd91fcdb___RS_LB 4819.JPG')
 
-    predicted_class = class_names[np.argmax(predictions[0])]
-    confidence = round(100 * (np.max(predictions[0])), 2)
-    return predicted_class, confidence
+# Decode the image
+image = tf.image.decode_image(image)
+
+# Preprocess the image
+image = tf.image.resize(image, (256, 256))  # Resize to model input size
+image = image / 255.0  # Normalize pixel values
+
+# Add an additional dimension to the input tensor
+image = tf.expand_dims(image, axis=0)
+
+# Make predictions
+predictions = model.predict(image)
+
+print(predictions)
+
+print(class_names[np.argmax(predictions)])

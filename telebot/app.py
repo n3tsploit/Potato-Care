@@ -1,7 +1,7 @@
 import telegram
 from telegram.ext import *
 from telegram import *
-from telebot.functions import image_check
+from telebot.functions import predict
 from dotenv import load_dotenv
 from pathlib import Path
 import os
@@ -23,8 +23,8 @@ def photo_handler(update, context):
     file = update.message.document.file_id
     print('downloading')
     obj = context.bot.get_file(file)
-    file = obj.download()
-    response = image_check(file)
+    file = obj.download('image.jpg')
+    response = predict(file)
     print(file)
     update.message.reply_text(f'The plant disease is: {response}')
 
