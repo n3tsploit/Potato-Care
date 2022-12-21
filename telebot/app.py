@@ -11,7 +11,7 @@ TOKEN = os.getenv('TOKEN')
 
 
 def start_command(update, context):
-    context.bot.sendMessage(text='welcome😊\n  Just send a picture of a potato leaf and let our AI do the rest😉.', chat_id=update.effective_chat.id)
+    context.bot.sendMessage(text='WELCOME🥳\nJust send a picture of a potato leaf and let our AI do the rest😉.', chat_id=update.effective_chat.id)
 
 
 def help_command(update, context):
@@ -39,7 +39,7 @@ def main():
     updater = Updater(TOKEN, use_context=True)
     disp = updater.dispatcher
 
-    disp.add_handler(CommandHandler('help', start_command))
+    disp.add_handler(CommandHandler('help', help_command))
     disp.add_handler(CommandHandler('start', start_command))
 
     disp.add_handler(MessageHandler(Filters.text, messages))
