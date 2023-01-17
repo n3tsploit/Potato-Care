@@ -1,7 +1,7 @@
 # Potato Leaf Disease Prediction Telegram Bot
 Welcome to my Potato Leaf Disease Prediction Telegram Bot! This bot uses artificial intelligence (AI) and a convolutional neural network (CNN) to accurately predict diseases affecting potato plant leaves.
 
-##How to use the bot
+## How to use the bot
 Using the bot is easy! Simply follow these steps:
 
 Open a chat with the bot on Telegram at https://t.me/PotatoDiseaseBot.
@@ -12,7 +12,7 @@ Wait for the bot to return its prediction on the disease affecting the leaves.
 
 That's it! The bot will use its trained CNN model to analyze the picture and provide you with a prediction on the disease present.
 
-##Why use the bot?
+## Why use the bot?
 Accurately predicting and identifying potato leaf diseases is important for ensuring a healthy and successful crop. By using the bot, you can quickly and easily get a prediction on the disease affecting your plants, allowing you to take appropriate action to address the issue.
 
 
